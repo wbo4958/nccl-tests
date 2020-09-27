@@ -714,7 +714,7 @@ testResult_t run() {
   }
 #endif
   is_main_thread = (proc == 0) ? 1 : 0;
-
+  PRINT("Hostname: %s\n", hostname);
   PRINT("# nThread %d nGpus %d minBytes %ld maxBytes %ld step: %ld(%s) warmup iters: %d iters: %d validation: %d \n", nThreads, nGpus, minBytes, maxBytes,
       (stepFactor > 1)?stepFactor:stepBytes, (stepFactor > 1)?"factor":"bytes", warmup_iters, iters, datacheck);
   if (blocking_coll) PRINT("# Blocking Enabled: wait for completion and barrier after each collective \n");

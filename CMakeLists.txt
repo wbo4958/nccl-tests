@@ -6,7 +6,7 @@ set (THIRD_PARTY /home/bobwang/work.d/nvspark/cudf/thirdparty)
 set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc)
 project("nccl-tests" VERSION 0.7.2 LANGUAGES C CXX CUDA)
 
-add_compile_definitions(__CUDACC__ XGBOOST_USE_CUDF XGBOOST_USE_CUDA XGBOOST_USE_NCCL)
+add_compile_definitions(__CUDACC__ MPI_SUPPORT=1 NCCL_MAJOR=2 NCCL_MINOR=7)
 
 find_package(CUDA REQUIRED)
 
@@ -23,9 +23,9 @@ file(GLOB_RECURSE SRC_SOURCES
         src/*.h
         src/*.cu
         )
-include_directories(xgboost/rabit/include)
 list(APPEND SOURCE_FILES ${SRC_SOURCES})
+include_directories(/home/bobwang/work.d/nvspark/library/ompi/include)
 
-include_directories(src/include)
+include_directories(/home/bobwang/work.d/nvspark/library/nccl/nccl_2.7.8-1+cuda10.1_x86_64/include)
 
 add_library(cudf SHARED ${SOURCE_FILES})
